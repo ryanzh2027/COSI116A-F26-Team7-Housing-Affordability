@@ -130,3 +130,46 @@ h1, h2, h3 {
 .trend-card .line-note { min-height:17px; }
 @media(max-width:710px){.trend-card .trend-controls{grid-template-columns:1fr 1fr;}.trend-card .trend-controls label:first-child{grid-column:1/-1;}}
 @media(max-width:480px){.trend-card .trend-controls{grid-template-columns:1fr;}.trend-card .trend-controls label:first-child{grid-column:auto;}.trend-card .trend-key{gap:8px 11px;}}
+
+/* Scatterplot */
+#scatterplot {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+#scatterplot svg {
+  width: 100%;
+  height: auto;
+}
+
+.chart-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.axis-label {
+  font-size: 14px;
+}
+
+.equality-line {
+  stroke: #666;
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+
+.metro-point {
+  cursor: pointer;
+}
+
+.scatter-tooltip {
+  position: absolute;
+  background: white;
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}

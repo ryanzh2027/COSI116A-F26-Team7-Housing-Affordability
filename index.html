@@ -73,6 +73,47 @@
 
   </div>
 
+  <!-- Bar Chart - Mingya -->
+  <div class="housing-burden-percentage-based-on-metro-area">
+
+    <div id="chart-container"></div>
+
+    <label for="chartyear">Select Year:</label>
+    <select id="chartyear">
+      <option value="2024">2024</option>
+      <option value="2023">2023</option>
+      <option value="2022">2022</option>
+      <option value="2021">2021</option>
+    </select>
+
+    <label for="chartmode">Show Top N Metros:</label>
+    <select id="chartmode">
+      <option value="top">Top N Amount</option>
+      <option value="bottom">Bottom N Amount</option>
+      <option value="all">All Metros</option>
+    </select>
+
+    <label for="chartcount">Number of Metros to Show:</label>
+    <input id="chartcount" type="number" min="1" step="1" value="10">
+
+    <svg
+      id="barchartsvg"
+      preserveAspectRatio="xMidYMid meet"
+      class="marks"
+      viewBox="0 0 800 800"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+    </svg>
+
+    <!-- Scatterplot - Wenqi -->
+    <section class="chart-section">
+      <div id="scatterplot"></div>
+    </section>
+
+  </div>
+  </div>
+
 
   <!-- ========================================== -->
   <!-- Interactive Line Chart - Zoe Zhao          -->
@@ -368,9 +409,11 @@
 
   <!-- Original Team Visualization -->
   <script src="js/visualization.js"></script>
-
+  
   <!-- Zoe's Interactive Line Chart -->
   <script src="js/linechart.js"></script>
 
+  <!-- Wenqi's Scatterplot -->
+  <script src="js/scatterplot.js"></script>
 </body>
 </html>
