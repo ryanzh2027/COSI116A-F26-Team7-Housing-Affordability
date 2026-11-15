@@ -6,10 +6,13 @@
   <meta charset="utf-8">
   
   <!-- Title -->
-  <title>Project Team #: Topic, COSI 116A F26</title>
+  <title>Team 7: Housing Affordability, COSI 116A F26</title>
   
-  <!-- CSS Styling -->
-  <link rel="stylesheet" href="style.css">
+<!-- Shared CSS -->
+<link rel="stylesheet" href="css/style.css">
+<!-- Individual Chart CSS -->
+<link rel="stylesheet" href="css/linechart.css">
+<link rel="stylesheet" href="css/scatterplot.css">
  
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
@@ -28,9 +31,14 @@
   <!-- Your writeup goes here -->
   <div class = "content-column">
   
-    <h1>Project Team #: Topic, COSI 116A F26</h1>
-    
-    <p><strong>Student One</strong>, <strong>Student Two</strong>, <strong>Student Three</strong></p>
+  <h1>Team 7: Housing Affordability, COSI 116A F26</h1>
+
+  <p>
+    <strong>Wenqi Deng</strong>,
+    <strong>Mingya Huang</strong>,
+    <strong>Zoe Zhao</strong>,
+    <strong>Ryan Zhong</strong>
+  </p>
     
     <p>Project-long Course Project as part of COSI 116A: Information Visualization, taught by <a href="https://cs.brandeis.edu/~dylan/">Prof. Dylan Cashman</a>, <a href="https://cs.brandeis.edu/">Brandeis University</a>.</p>
     
@@ -81,14 +89,12 @@
       xmlns:xlink="http://www.w3.org/1999/xlink">
     </svg>
 
-    <!-- Scatterplot - Wenqi -->
-    <section class="chart-section">
-      <div id="scatterplot"></div>
-    </section>
-
-  </div>
   </div>
 
+  <!-- Scatterplot - Wenqi -->
+  <section class="chart-section">
+    <div id="scatterplot"></div>
+  </section>
 
   <!-- ========================================== -->
   <!-- Interactive Line Chart - Zoe Zhao          -->
@@ -306,13 +312,14 @@
   
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src="lib/d3.v7/d3.v7.min.js"></script>
-  <script src="js/visualization.js"></script>
 
-  <!-- Zoe's Interactive Line Chart -->
+  <!-- Individual Charts -->
+  <script src="js/barchart.js"></script>
   <script src="js/linechart.js"></script>
-
-  <!-- Wenqi's Scatterplot -->
   <script src="js/scatterplot.js"></script>
+
+  <!-- Shared Visualization -->
+  <script src="js/visualization.js"></script>
 
 </body>
 </html>
