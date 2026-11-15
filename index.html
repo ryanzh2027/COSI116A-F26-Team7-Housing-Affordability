@@ -1,16 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <!-- Metadata -->
 <head>
   <meta charset="utf-8">
-  
+
   <!-- Title -->
-  <title>Project Team #: Topic, COSI 116A F26</title>
-  
+  <title>Team 7: Housing Affordability, COSI 116A F26</title>
+
   <!-- CSS Styling -->
   <link rel="stylesheet" href="style.css">
- 
+
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -26,119 +27,393 @@
 <body>
 
   <!-- Your writeup goes here -->
-  <div class = "content-column">
-  
-    <h1>Project Team #: Topic, COSI 116A F26</h1>
-    
-    <p><strong>Student One</strong>, <strong>Student Two</strong>, <strong>Student Three</strong></p>
-    
-    <p>Project-long Course Project as part of COSI 116A: Information Visualization, taught by <a href="https://cs.brandeis.edu/~dylan/">Prof. Dylan Cashman</a>, <a href="https://cs.brandeis.edu/">Brandeis University</a>.</p>
-    
-    
-    <h1>Motivation</h1>
-    
-    <p><em>Summary of user needs and motivating questions.</em></p>
-    
-    <p><em>Expectation: There is a clear focus, and a developed explanation of the problem, and a reasonable response is proposed.</em></p>
+  <div class="content-column">
 
-    
+    <h1>Team 7: Housing Affordability, COSI 116A F26</h1>
+
+    <p>
+      <strong>Wenqi Deng</strong>,
+      <strong>Mingya Huang</strong>,
+      <strong>Zoe Zhao</strong>,
+      <strong>Ryan Zhong</strong>
+    </p>
+
+    <p>
+      Project-long Course Project as part of COSI 116A:
+      Information Visualization, taught by
+      <a href="https://cs.brandeis.edu/~dylan/">
+        Prof. Dylan Cashman
+      </a>,
+      <a href="https://cs.brandeis.edu/">
+        Brandeis University
+      </a>.
+    </p>
+
+    <h1>Motivation</h1>
+
+    <p>
+      <em>Summary of user needs and motivating questions.</em>
+    </p>
+
+    <p>
+      <em>
+        Expectation: There is a clear focus, and a developed
+        explanation of the problem, and a reasonable response
+        is proposed.
+      </em>
+    </p>
+
     <h1>Visualization</h1>
-    
-    <p><em>Include the interactive visualization as part of this page. Static example follows.</em></p>
-    
+
+    <p>
+      <em>
+        Include the interactive visualization as part of this page.
+      </em>
+    </p>
+
   </div>
-  
-  <!-- Your visualization here -->
+
+  <!-- Bar Chart - Mingya -->
   <div class="housing-burden-percentage-based-on-metro-area">
-    <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->    
-    <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
+
     <div id="chart-container"></div>
+
     <label for="chartyear">Select Year:</label>
-    <select id = "chartyear">
+    <select id="chartyear">
       <option value="2024">2024</option>
       <option value="2023">2023</option>
       <option value="2022">2022</option>
       <option value="2021">2021</option>
     </select>
+
     <label for="chartmode">Show Top N Metros:</label>
     <select id="chartmode">
-      <option value = 'top'>Top N Amount</option>
-      <option value = 'bottom'>Bottom N Amount</option>
-      <option value = 'all'>All Metros</option>
+      <option value="top">Top N Amount</option>
+      <option value="bottom">Bottom N Amount</option>
+      <option value="all">All Metros</option>
     </select>
-    <label for='chartcount'>Number of Metros to Show:</label>
-    <input id='chartcount' type ='number' min='1' step='1' value='10'>
 
-    <svg id= "barchartsvg"
-      preserveAspectRatio="xMidYMid meet" class="marks" viewBox="0 0 800 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-     
+    <label for="chartcount">Number of Metros to Show:</label>
+    <input id="chartcount" type="number" min="1" step="1" value="10">
 
-
-    <!-- Don't delete the closing tag! -->
+    <svg
+      id="barchartsvg"
+      preserveAspectRatio="xMidYMid meet"
+      class="marks"
+      viewBox="0 0 800 800"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
     </svg>
 
+    <!-- Scatterplot - Wenqi -->
     <section class="chart-section">
       <div id="scatterplot"></div>
     </section>
+
   </div>
-  
-  <!-- Your writeup goes here -->
-  <div class = "content-column">
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- Interactive Line Chart - Zoe Zhao          -->
+  <!-- ========================================== -->
+
+  <section class="trend-card" aria-labelledby="line-chart-heading">
+
+    <div class="trend-header">
+
+      <div>
+        <p class="trend-eyebrow">
+          HOUSING AFFORDABILITY · 2021–2024
+        </p>
+
+        <h2 id="line-chart-heading">
+          Housing affordability across metros
+        </h2>
+
+        <p class="trend-subtitle">
+          Explore every metro in context;
+          highlight one to inspect its trend
+        </p>
+      </div>
+
+      <span class="trend-chip">
+        ACS · 2021–2024
+      </span>
+
+    </div>
+
+
+    <!-- Line Chart Controls -->
+    <div class="trend-controls">
+
+      <!-- Metric selector -->
+      <label for="metric-select">
+        Measure
+
+        <select id="metric-select">
+
+          <option value="renter_burden_pct">
+            Renter burden (%)
+          </option>
+
+          <option value="mortgage_owner_burden_pct">
+            Mortgage-owner burden (%)
+          </option>
+
+          <option value="burden_gap_renter_minus_mortgage_pp">
+            Renter − owner burden gap (pp)
+          </option>
+
+          <option value="median_household_income">
+            Median household income (USD)
+          </option>
+
+          <option value="median_owner_home_value">
+            Median home value (USD)
+          </option>
+
+        </select>
+      </label>
+
+
+      <!-- Selected metro -->
+      <label for="metro-select">
+        Highlighted metro
+
+        <select
+          id="metro-select"
+          aria-label="Choose a highlighted metropolitan area">
+        </select>
+
+      </label>
+
+
+      <!-- Comparison metro -->
+      <label for="compare-select">
+        Compare another metro
+        <span class="optional">(optional)</span>
+
+        <select id="compare-select">
+          <option value="">None</option>
+        </select>
+
+      </label>
+
+    </div>
+
+
+    <!-- Show all metros toggle -->
+    <div class="trend-toolbar">
+
+      <label class="trend-check">
+        <input
+          id="show-context"
+          type="checkbox"
+          checked>
+
+        Show all metros as context
+      </label>
+
+      <span id="line-count" class="trend-count"></span>
+
+    </div>
+
+
+    <!-- Legend -->
+    <div class="trend-key" aria-label="Line chart color key">
+
+      <span>
+        <i class="key-line key-context"></i>
+        Other metros
+      </span>
+
+      <span>
+        <i class="key-line key-selected"></i>
+        Selected metro
+      </span>
+
+      <span>
+        <i class="key-line key-compare"></i>
+        Comparison
+      </span>
+
+      <span>
+        <i class="key-line key-hover"></i>
+        Hover preview
+      </span>
+
+    </div>
+
+
+    <!-- D3 Line Chart -->
+    <div class="line-chart-holder">
+
+      <svg
+        id="line-chart"
+        role="img"
+        aria-label="Metropolitan area housing affordability trends from 2021 through 2024">
+      </svg>
+
+      <!-- Tooltip -->
+      <div
+        id="line-tooltip"
+        class="line-tooltip"
+        role="status">
+      </div>
+
+    </div>
+
+
+    <!-- Status message -->
+    <p id="line-message" class="line-note"></p>
+
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- Original Team Documentation                -->
+  <!-- ========================================== -->
+
+  <div class="content-column">
 
     <h1>Demo Video</h1>
-    
-    <p><em>Embedded MP4 demo video using the HTML5 &lt;video&gt; tag. Put your video file in the <code>files</code> folder and update the file name below.</em></p>
-    
+
+    <p>
+      <em>
+        Embedded MP4 demo video using the HTML5
+        &lt;video&gt; tag. Put your video file in the
+        <code>files</code> folder and update the file name below.
+      </em>
+    </p>
+
     <video controls width="100%">
       <source src="files/demo.mp4" type="video/mp4">
-      <p>Your browser doesn't support HTML5 video. Here is
-       a <a href="files/demo.mp4">link to the video</a> instead.</p>
+
+      <p>
+        Your browser doesn't support HTML5 video.
+        Here is
+        <a href="files/demo.mp4">a link to the video</a>
+        instead.
+      </p>
     </video>
 
+
     <h1>Visualization explanation</h1>
-    
-    <p><em>Final visualization screenshots (PNG images), design justifications, UI walk-through, and linked presentation slides.</em></p>
+
+    <p>
+      <em>
+        Final visualization screenshots (PNG images),
+        design justifications, UI walk-through,
+        and linked presentation slides.
+      </em>
+    </p>
+
 
     <h1>Data Analysis</h1>
-    <p><em>Summary of data, data types, and data preprocessing.</em></p>
 
-    <p><em>Expectation: Data sources match the problem statement and are appropriate. These descriptions should be very explicit so someone could read your page and properly reproduce your results.</em></p>
+    <p>
+      <em>
+        Summary of data, data types, and data preprocessing.
+      </em>
+    </p>
+
+    <p>
+      <em>
+        Expectation: Data sources match the problem statement
+        and are appropriate. These descriptions should be very
+        explicit so someone could read your page and properly
+        reproduce your results.
+      </em>
+    </p>
+
 
     <h1>Task Analysis</h1>
 
-    <p><em>Summary of task table.</em></p>
+    <p>
+      <em>Summary of task table.</em>
+    </p>
 
-    <p><em>Expectation: Clearly describes domain tasks, processes, goals and abstract tasks for domain problems.</em></p>
+    <p>
+      <em>
+        Expectation: Clearly describes domain tasks, processes,
+        goals and abstract tasks for domain problems.
+      </em>
+    </p>
+
 
     <h1>Design Process</h1>
-    
-    <p><em>Sketches and design choices to justify final visualization.</em></p>
 
-    <p><em>Expectation: Evidence of iterative improvement.
-    Logical discussion of design choices grounded in theory from course.
-    Discusses feedback from usability testing.</em></p>
+    <p>
+      <em>
+        Sketches and design choices to justify final visualization.
+      </em>
+    </p>
+
+    <p>
+      <em>
+        Expectation: Evidence of iterative improvement.
+        Logical discussion of design choices grounded in
+        theory from course. Discusses feedback from
+        usability testing.
+      </em>
+    </p>
 
 
     <h1>Conclusion</h1>
 
-    <p><em>Short summary of work completed and areas for improvement/future-work.</em></p>
-    
-    <p><em>Expectation: Meaningfully wraps up project and has good future directions.</em></p>
+    <p>
+      <em>
+        Short summary of work completed and areas for
+        improvement/future-work.
+      </em>
+    </p>
 
-    
+    <p>
+      <em>
+        Expectation: Meaningfully wraps up project
+        and has good future directions.
+      </em>
+    </p>
+
+
     <h1>Acknowledgments</h1>
 
-    <p><em>List here where any code, packages/libraries, text, images, designs, slides, etc. that you leverage come from. Include any use of LLMs and AIs.</em></p>
-    
+    <p>
+      <em>
+        List here where any code, packages/libraries,
+        text, images, designs, slides, etc. that you
+        leverage come from. Include any use of LLMs and AIs.
+      </em>
+    </p>
+
     <ul>
-      <li><a href="https://d3js.org/">D3: Data-Driven Documents</a> by Mike Bostock.</li>
+      <li>
+        <a href="https://d3js.org/">
+          D3: Data-Driven Documents
+        </a>
+        by Mike Bostock.
+      </li>
     </ul>
-    
+
   </div>
-  
-  <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
+
+
+  <!-- ========================================== -->
+  <!-- JavaScript                                 -->
+  <!-- ========================================== -->
+
+  <!-- D3 Library -->
   <script src="lib/d3.v7/d3.v7.min.js"></script>
+
+  <!-- Original Team Visualization -->
   <script src="js/visualization.js"></script>
+  
+  <!-- Zoe's Interactive Line Chart -->
+  <script src="js/linechart.js"></script>
+
+  <!-- Wenqi's Scatterplot -->
   <script src="js/scatterplot.js"></script>
 </body>
 </html>
