@@ -1,0 +1,216 @@
+
+/*
+ * Bar Chart styles
+ */
+
+/* Bar Chart SVG */
+
+.vis-holder #barchart {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+}
+
+/* Scroll area */
+
+.vis-holder .bar-scroll {
+  width: 100%;
+  min-width: 0;
+  max-height: 600px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* Bar Chart controls */
+
+.vis-holder .bar-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 12px 0 15px;
+}
+
+.vis-holder .bar-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+
+  color: #596b82;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.vis-holder .bar-controls select,
+.vis-holder .bar-controls input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 8px;
+
+  background: #f9fbfe;
+  border: 1px solid #dce5ee;
+  border-radius: 6px;
+  color: #253950;
+  font-size: 12px;
+}
+
+.vis-holder .bar-controls input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Axes */
+
+#barchart .domain,
+#barchart .tick line {
+  stroke: #cad5e0;
+}
+
+#barchart .tick text {
+  fill: #53677e;
+  font-size: 11px;
+}
+
+/* Bars */
+
+#barchart .metro-bar {
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+#barchart .metro-bar:hover {
+  opacity: 0.88;
+}
+
+/* Primary metro */
+
+#barchart .metro-bar.selected {
+  stroke: #e68132;
+  stroke-width: 2.5px;
+}
+
+/* Hovered metro */
+
+.vis-holder #barchart
+.metro-bar.linked-hover:not(.selected):not(.comparison-metro) {
+  stroke: #1d3148;
+  stroke-width: 2.5px;
+}
+
+/* Comparison metro */
+
+.vis-holder #barchart
+.metro-bar.comparison-metro {
+  stroke: #3281b9;
+  stroke-width: 2.5px;
+}
+
+/* Metro names */
+
+#barchart .bar-label {
+  fill: #304a64;
+  font-size: 11px;
+}
+
+/* Values at bar ends */
+
+#barchart .value-label {
+  fill: #304a64;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Tooltip */
+
+.bar-tooltip {
+  display: none;
+  position: fixed;
+  z-index: 101;
+  pointer-events: none;
+  box-sizing: border-box;
+
+  max-width: 280px;
+  padding: 9px 12px;
+
+  background: #23394f;
+  color: #fff;
+  border: 1px solid #45627e;
+  border-radius: 7px;
+
+  font: 12px/1.5 Arial, sans-serif;
+  box-shadow: 0 4px 14px rgba(30, 50, 75, 0.2);
+}
+
+/* Ranking description */
+
+.vis-holder #bar-description {
+  margin-top: 10px;
+  color: #73849a;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* Rankings — Clear All */
+
+.vis-holder .bar-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 12px;
+}
+
+.vis-holder #bar-clear-all {
+  padding: 7px 12px;
+  border: 1px solid #c8d9e9;
+  border-radius: 6px;
+  background: white;
+  color: #356e9f;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.vis-holder #bar-clear-all:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Signed gap comparison tracks */
+
+.vis-holder .bar-compare-track.is-gap::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  bottom: -3px;
+  border-left: 1px solid #879aad;
+  z-index: 2;
+}
+
+
+
+/* Bar Chart — automatic height */
+
+.vis-holder .bar-scroll {
+  width: 100%;
+  min-width: 0;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.vis-holder #barchart {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+}
+
+/* Hide number field in All mode */
+
+.vis-holder .bar-controls
+#bar-count-field[hidden] {
+  display: none;
+}

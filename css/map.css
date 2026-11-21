@@ -1,0 +1,280 @@
+
+/*
+ * Map styles
+ */
+
+/* Map toolbar */
+
+.vis-holder .toolbar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+}
+
+.vis-holder .control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vis-holder .control label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #596b82;
+}
+
+.vis-holder .control select {
+  padding: 8px 10px;
+  border: 1px solid #d9e4ef;
+  border-radius: 6px;
+  background: #f7fafe;
+  color: #24354e;
+  font-size: 12px;
+}
+
+/* Selected metro information */
+
+.vis-holder #selection {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  font-size: 12px;
+  color: #24354e;
+}
+
+.vis-holder #selected-name {
+  font-weight: 700;
+}
+
+.vis-holder #clear-selection {
+  padding: 5px 9px;
+  cursor: pointer;
+  border: 1px solid #d9e4ef;
+  border-radius: 5px;
+  background: #fff;
+  color: #53677e;
+  font-size: 16px;
+}
+
+.vis-holder #clear-selection:hover {
+  background: #f0f5fa;
+}
+
+/* Map heading */
+
+.vis-holder #map-heading {
+  padding: 10px 15px;
+  color: #24354e;
+  font: bold 16px Arial, sans-serif;
+}
+
+/* Map SVG */
+
+.vis-holder #map {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+/* State backgrounds */
+
+.vis-holder .state {
+  fill: #edf2f7;
+}
+
+.vis-holder .state-border {
+  fill: none;
+  stroke: #b6c5d3;
+  stroke-width: 0.7;
+  pointer-events: none;
+}
+
+/* Normal metros */
+
+.vis-holder .metro {
+  stroke: #fff;
+  stroke-width: 0.5;
+  cursor: pointer;
+}
+
+.vis-holder .metro:hover {
+  stroke: #253a55;
+  stroke-width: 1.6;
+}
+
+/* Primary metro: orange */
+
+.vis-holder .metro.selected {
+  stroke: #ed8735;
+  stroke-width: 2.6;
+}
+
+/* Comparison metro: blue */
+
+.vis-holder .metro.compare {
+  stroke: #3281b9;
+  stroke-width: 2.8;
+}
+
+/* Hover linked from another chart */
+
+.vis-holder .metro.linked-hover:not(.selected):not(.compare) {
+  stroke: #293f59;
+  stroke-width: 2.2;
+}
+
+/* State abbreviations */
+
+.vis-holder .state-label {
+  fill: #536a84;
+  font: bold 11px Arial, sans-serif;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
+}
+
+/* Map footer */
+
+.vis-holder .map-footer {
+  padding: 12px 15px;
+  font-size: 12px;
+  color: #53677e;
+}
+
+/* Legend */
+
+.vis-holder .legend-title {
+  font-weight: 600;
+  font-size: 12px;
+  color: #53677e;
+}
+
+.vis-holder #legend-gradient {
+  width: 380px;
+  max-width: 100%;
+  height: 14px;
+  margin-top: 9px;
+  border: 1px solid #d9e2ed;
+  border-radius: 4px;
+}
+
+.vis-holder .legend-values {
+  display: flex;
+  justify-content: space-between;
+  width: 380px;
+  max-width: 100%;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #53677e;
+}
+
+.vis-holder #legend-note,
+.vis-holder #status {
+  margin-top: 9px;
+  font-size: 11px;
+  color: #73849a;
+}
+
+.vis-holder .map-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.vis-holder .map-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vis-holder .no-data-marker {
+  color: #b6c5d3;
+}
+
+/* Map tooltip — created by map.js in body */
+
+#tooltip {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  box-sizing: border-box;
+
+  width: 340px;
+  max-width: calc(100vw - 20px);
+  padding: 18px;
+
+  background: #fff;
+  color: #24292f;
+  border: 1px solid #e4e8ec;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(30, 50, 75, 0.12);
+
+  font: 12px/1.5 Arial, sans-serif;
+}
+
+#tip-name {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#tip-meta {
+  margin: 8px 0 12px;
+  color: #7a838f;
+}
+
+#tooltip .tip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+}
+
+#tooltip .tip-row span:last-child {
+  font-weight: 700;
+  text-align: right;
+}
+
+#tooltip .tip-trend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #edf0f3;
+}
+
+#tooltip .trend-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+
+  border: 2px solid #16834a;
+  border-radius: 50%;
+  color: #16834a;
+  font-weight: 700;
+}
+
+#tooltip .trend-icon.warning {
+  color: #d68b23;
+  border-color: #d68b23;
+}
+
+#tooltip .trend-icon.unknown {
+  color: #929aa5;
+  border-color: #929aa5;
+}

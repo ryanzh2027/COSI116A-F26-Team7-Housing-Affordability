@@ -1,0 +1,307 @@
+
+/*
+ *
+ * Map: full width
+ * Left: Line Chart + Scatterplot
+ * Right: Bar Chart
+ */
+
+/* Dashboard container */
+
+.vis-holder .dashboard {
+  box-sizing: border-box;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 12px;
+
+  color: #24354e;
+  font: 14px/1.5 Arial, sans-serif;
+}
+
+.vis-holder .dashboard *,
+.vis-holder .dashboard *::before,
+.vis-holder .dashboard *::after {
+  box-sizing: border-box;
+}
+
+/* Shared cards */
+
+.vis-holder .map-card,
+.vis-holder .chart-card {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #e1e8f0;
+  border-radius: 9px;
+}
+
+.vis-holder .chart-card {
+  width: 100%;
+  padding: 12px;
+}
+
+/* Map occupies the full dashboard width */
+
+/* .vis-holder .map-card {
+  width: 100%;
+  overflow: hidden;
+} */
+
+.vis-holder .map-card {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+
+.vis-holder #map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Three-chart layout */
+
+.vis-holder #other-charts {
+  display: grid;
+  /* grid-template-columns:
+    minmax(0, 3fr)
+    minmax(0, 2fr); */
+  grid-template-columns:
+  minmax(0, 1fr)
+  minmax(0, 1.15fr);
+  align-items: start;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+/* Left column: Line Chart + Scatterplot */
+
+.vis-holder .left-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* Line Chart inside the left column */
+
+.vis-holder .left-charts .trend-card {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 14px;
+  overflow: visible;
+  box-shadow: none;
+}
+
+/* Responsive SVG sizing */
+
+.vis-holder #line-chart,
+.vis-holder #scatterplot {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Bar Chart column */
+
+/* .vis-holder .bar-card {
+  min-width: 0;
+  overflow: hidden;
+} */
+
+.vis-holder .bar-card {
+  min-width: 0;
+  overflow: visible;
+}
+
+
+/* .vis-holder .bar-scroll {
+  width: 100%;
+  max-height: 600px;
+  overflow-x: auto;
+  overflow-y: auto;
+} */
+
+.vis-holder .bar-scroll {
+  width: 100%;
+  min-width: 0;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+
+/* Dashboard title and subtitle */
+
+.vis-holder .dashboard > h1,
+.vis-holder .dashboard > .subtitle {
+  text-align: center;
+}
+
+
+/* Shared chart headings */
+
+.vis-holder .chart-card h2 {
+  margin: 0 0 6px;
+  color: #24354e;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.vis-holder .chart-header {
+  margin-bottom: 10px;
+}
+
+.vis-holder .chart-description {
+  margin: 4px 0 10px;
+  color: #73849a;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Keyboard navigation */
+
+.vis-holder select:focus-visible,
+.vis-holder input:focus-visible,
+.vis-holder button:focus-visible {
+  outline: 2px solid #5388c5;
+  outline-offset: 2px;
+}
+
+/* Clickable chart elements */
+
+.vis-holder .metro,
+.vis-holder .metro-point,
+.vis-holder .metro-bar {
+  cursor: pointer;
+}
+
+/* Dashboard errors */
+
+.vis-holder #dashboard-error {
+  margin: 10px 0;
+  color: #b42318;
+  font-size: 12px;
+}
+
+.vis-holder #dashboard-error:empty {
+  display: none;
+}
+
+/* Responsive: stack columns */
+
+/* @media (max-width: 850px) {
+  .vis-holder #other-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .vis-holder .dashboard {
+    padding: 8px;
+  }
+
+  .vis-holder .bar-scroll {
+    max-height: 500px;
+  }
+} */
+
+@media (max-width: 850px) {
+  .vis-holder #other-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .vis-holder .dashboard {
+    padding: 8px;
+  }
+}
+
+
+/* Small screens */
+
+@media (max-width: 520px) {
+  .vis-holder .chart-card {
+    padding: 10px;
+  }
+
+  .vis-holder .left-charts .trend-card {
+    padding: 10px;
+  }
+
+  .vis-holder .bar-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vis-holder .trend-key {
+    gap: 6px 10px;
+  }
+}
+
+/* Dashboard layout */
+
+.vis-holder .dashboard {
+  max-width: 1300px;
+}
+
+/* Map remains centered and moderately sized */
+.vis-holder .map-card {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+/* One row for Line + Scatter, Bar below */
+.vis-holder #other-charts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+/* Line Chart and Scatterplot side by side */
+.vis-holder #other-charts .left-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+/* Bar Chart centered, but not too wide */
+.vis-holder #other-charts .bar-card {
+  width: 100%;
+  max-width: 980px;
+  justify-self: center;
+  min-width: 0;
+}
+
+/* Stack Line and Scatter when space is limited */
+@media (max-width: 1100px) {
+  .vis-holder #other-charts .left-charts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Line Chart and Scatterplot: equal card size */
+
+.vis-holder #other-charts .left-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
+}
+
+.vis-holder #other-charts .left-charts > .chart-card {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Keep charts responsive on smaller screens */
+
+@media (max-width: 1100px) {
+  .vis-holder #other-charts .left-charts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

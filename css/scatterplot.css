@@ -1,42 +1,150 @@
-/* Scatterplot */
-#scatterplot {
+
+/*
+ * Scatterplot styles
+ */
+
+/* Scatterplot SVG */
+
+.vis-holder #scatterplot {
+  display: block;
   width: 100%;
-  max-width: 760px;
+  max-width: 100%;
+  height: auto;
   margin: 0 auto;
 }
 
-#scatterplot svg {
+/* Scatterplot controls */
+
+.vis-holder .scatter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0 12px;
+}
+
+.vis-holder .scatter-controls label {
+  color: #596b82;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.vis-holder .scatter-controls select {
   width: 100%;
-  height: auto;
+  min-width: 0;
+  padding: 8px 10px;
+
+  border: 1px solid #dce5ee;
+  border-radius: 6px;
+  background: #f9fbfe;
+  color: #253950;
+  font-size: 12px;
 }
 
-.chart-title {
-  font-size: 20px;
-  font-weight: 600;
+/* Axes */
+
+#scatterplot .axis-label {
+  fill: #546779;
+  font-size: 13px;
+  font-weight: 500;
 }
 
-.axis-label {
-  font-size: 14px;
+#scatterplot .domain,
+#scatterplot .tick line {
+  stroke: #cad5e0;
 }
 
-.equality-line {
+#scatterplot .tick text {
+  fill: #71819a;
+  font-size: 11px;
+}
+
+/* Equality reference: renter = owner */
+
+#scatterplot .equality-line {
+  fill: none;
   stroke: #666;
   stroke-width: 1.5;
   stroke-dasharray: 6 5;
 }
 
-.metro-point {
+/* Metro points */
+
+#scatterplot .metro-point {
   cursor: pointer;
+  transition: opacity 0.15s ease;
 }
 
+/* Primary metro: orange outline */
+
+#scatterplot .metro-point.selected {
+  stroke: #e68132;
+  stroke-width: 3px;
+  opacity: 1;
+}
+
+/* Linked hover from other charts */
+
+.vis-holder #scatterplot
+.metro-point.linked-hover:not(.comparison-metro) {
+  stroke: #1b2a3c;
+  stroke-width: 2.7px;
+  opacity: 1;
+}
+
+/* Comparison metro: blue outline */
+
+.vis-holder #scatterplot
+.metro-point.comparison-metro {
+  stroke: #3281b9;
+  stroke-width: 3px;
+  opacity: 1;
+}
+
+/* Legend */
+
+#scatterplot .scatter-legend {
+  font-size: 11px;
+}
+
+#scatterplot .scatter-legend text {
+  fill: #53677e;
+}
+
+#scatterplot .scatter-legend .legend-text {
+  font-size: 10px;
+}
+
+#scatterplot .scatter-legend .legend-circle {
+  stroke: #fff;
+  stroke-width: 0.8px;
+}
+
+/* Tooltip */
+
 .scatter-tooltip {
-  position: absolute;
-  background: white;
-  border: 1px solid #999;
-  border-radius: 5px;
-  padding: 8px 10px;
-  font-size: 13px;
-  line-height: 1.4;
+  display: none;
+  position: fixed;
+  z-index: 101;
   pointer-events: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+
+  max-width: 280px;
+  padding: 10px 12px;
+
+  background: #23394f;
+  color: #fff;
+  border: 1px solid #45627e;
+  border-radius: 7px;
+
+  font: 12px/1.5 Arial, sans-serif;
+  box-shadow: 0 4px 14px rgba(30, 50, 75, 0.2);
+}
+
+/* Number of metros */
+
+.vis-holder #scatter-count {
+  margin-top: 8px;
+  color: #73849a;
+  font-size: 11px;
+  line-height: 1.5;
 }

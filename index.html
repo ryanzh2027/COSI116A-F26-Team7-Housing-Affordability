@@ -6,14 +6,16 @@
   <meta charset="utf-8">
   
   <!-- Title -->
-  <title>Team 7: Housing Affordability, COSI 116A F26</title>
+  <title>Project Team 7: Topic, COSI 116A F26</title>
   
-<!-- Shared CSS -->
-<link rel="stylesheet" href="css/style.css">
-<!-- Individual Chart CSS -->
-<link rel="stylesheet" href="css/linechart.css">
-<link rel="stylesheet" href="css/scatterplot.css">
- 
+  <!-- CSS Styling -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/linechart.css">
+  <link rel="stylesheet" href="css/scatterplot.css">
+  <link rel="stylesheet" href="css/barchart.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -31,14 +33,9 @@
   <!-- Your writeup goes here -->
   <div class = "content-column">
   
-  <h1>Team 7: Housing Affordability, COSI 116A F26</h1>
-
-  <p>
-    <strong>Wenqi Deng</strong>,
-    <strong>Mingya Huang</strong>,
-    <strong>Zoe Zhao</strong>,
-    <strong>Ryan Zhong</strong>
-  </p>
+    <h1>Project Team 7: U.S. HOUSING AFFORDABILITY EXPLORER, COSI 116A F26</h1>
+    
+    <p><strong>Student One</strong>, <strong>Student Two</strong>, <strong>Student Three</strong></p>
     
     <p>Project-long Course Project as part of COSI 116A: Information Visualization, taught by <a href="https://cs.brandeis.edu/~dylan/">Prof. Dylan Cashman</a>, <a href="https://cs.brandeis.edu/">Brandeis University</a>.</p>
     
@@ -55,209 +52,350 @@
     <p><em>Include the interactive visualization as part of this page. Static example follows.</em></p>
     
   </div>
+  
+  <!-- Your visualization here -->
+  <div class="vis-holder">
+    <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->    
+    <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
+    
+    <!-- Interactive four-view housing affordability visualization -->
+    <div class="dashboard">
 
-  <!-- Bar Chart - Mingya -->
-  <div class="housing-burden-percentage-based-on-metro-area">
+      <!-- <div class="eyebrow">U.S. HOUSING AFFORDABILITY · DATA EXPLORER</div> -->
+      <h1>Housing Affordability Across U.S. Metro Areas</h1>
+      <p class="subtitle">
+        Explore housing cost burden, income, and home values from 2021 to 2024.
+      </p>
 
-    <div id="chart-container"></div>
+      <section class="map-card">
 
-    <label for="chartyear">Select Year:</label>
-    <select id="chartyear">
-      <option value="2024">2024</option>
-      <option value="2023">2023</option>
-      <option value="2022">2022</option>
-      <option value="2021">2021</option>
-    </select>
+        <div class="toolbar">
 
-    <label for="chartmode">Show Top N Metros:</label>
-    <select id="chartmode">
-      <option value="top">Top N Amount</option>
-      <option value="bottom">Bottom N Amount</option>
-      <option value="all">All Metros</option>
-    </select>
+          <div class="control">
+            <label for="year-select">YEAR</label>
+            <select id="year-select">
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024" selected>2024</option>
+            </select>
+          </div>
 
-    <label for="chartcount">Number of Metros to Show:</label>
-    <input id="chartcount" type="number" min="1" step="1" value="10">
+          <div class="control">
+            <label for="metric-select">HOUSING INDICATOR</label>
+            <select id="metric-select">
+              <option value="renter">Renter Cost Burden</option>
+              <option value="owner">Mortgage-Owner Cost Burden</option>
+              <option value="gap">Renter − Owner Burden Gap</option>
+              <option value="income">Median Household Income</option>
+              <option value="value">Median Home Value</option>
+            </select>
+          </div>
 
-    <svg
-      id="barchartsvg"
-      preserveAspectRatio="xMidYMid meet"
-      class="marks"
-      viewBox="0 0 800 800"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink">
-    </svg>
+          <div id="selection" class="selection">
+            <span>
+              Selected: <strong id="selected-name"></strong>
+            </span>
+            <button id="clear-selection" title="Clear selection">×</button>
+          </div>
 
+        </div>
+
+        <div id="map-heading" class="map-heading">
+          Renter Cost Burden · 2024
+        </div>
+
+        <svg id="map" viewBox="0 0 1050 650"></svg>
+
+        <div class="map-footer">
+          <div id="legend-title" class="legend-title"></div>
+          <div id="legend-gradient" class="legend-gradient"></div>
+
+          <div class="legend-values">
+            <span id="legend-min"></span>
+            <span id="legend-mid"></span>
+            <span id="legend-max"></span>
+          </div>
+
+          <div id="legend-note" class="legend-note"></div>
+
+          <div class="map-options">
+            <label>
+              <input type="checkbox" id="show-labels" checked>
+              Show state abbreviations
+            </label>
+            <span style="margin-left:20px;">
+              <span class="no-data-marker">■</span> Gray: No data
+            </span>
+          </div>
+
+          <div id="status">Loading map...</div>
+        </div>
+
+      </section>
+
+      <!-- Three additional SVG views. The existing map section above is unchanged. -->
+      <div id="other-charts">
+        <!-- Left column: Line Chart and Scatterplot -->
+        <div class="left-charts">
+
+          <!-- Line Chart -->
+          <section class="chart-card line-card trend-card" aria-labelledby="line-title">
+            <div class="trend-header">
+              <div>
+                <h2 id="line-title">Trends</h2>
+                <p class="trend-subtitle">Explore metropolitan housing trends from 2021 to 2024.</p>
+              </div>
+            </div>
+
+
+            <div class="trend-controls">
+
+              <!-- Housing Indicator -->
+              <div class="trend-indicator-field">
+                <label for="line-metric-select">
+                  HOUSING INDICATOR
+                </label>
+
+                <select id="line-metric-select">
+                  <option value="burden_compare" selected>
+                    Renter vs. Mortgage-Owner Burden
+                  </option>
+                  <option value="market_compare">
+                    Income vs. Home Value — Growth Index (2021 = 100)
+                  </option>
+                  <option value="market_actual">
+                    Income vs. Home Value — Actual Values ($)
+                  </option>
+                  <option value="renter_burden_pct">
+                    Renter Burden
+                  </option>
+                  <option value="mortgage_owner_burden_pct">
+                    Mortgage-Owner Burden
+                  </option>
+                  <option value="burden_gap_renter_minus_mortgage_pp">
+                    Renter − Owner Burden Gap
+                  </option>
+                  <option value="median_household_income">
+                    Median Household Income
+                  </option>
+                  <option value="median_owner_home_value">
+                    Median Home Value
+                  </option>
+                </select>
+              </div>
+
+              <!-- Searchable Multi-select -->
+              <div class="trend-metro-field">
+
+                <span class="trend-field-title">
+                  SELECT METROS
+                </span>
+
+                <button
+                  type="button"
+                  id="line-metro-picker-button"
+                  aria-expanded="false"
+                  aria-controls="line-metro-picker-menu"
+                >
+                  <span class="line-picker-caption">
+                    No metros selected
+                  </span>
+                  <span class="line-picker-arrow">⌄</span>
+                </button>
+
+                <div
+                  id="line-metro-picker-menu"
+                  class="trend-metro-menu"
+                  hidden
+                >
+                  <input
+                    type="search"
+                    id="line-metro-picker-search"
+                    placeholder="Search metro areas..."
+                    aria-label="Search metro areas"
+                  >
+
+                  <div id="line-metro-picker-list"></div>
+
+                  <div id="line-metro-picker-footer">
+                    <span id="line-metro-picker-count">
+                      0 selected
+                    </span>
+
+                    <button
+                      type="button"
+                      id="line-metro-picker-clear"
+                    >
+                      Clear selected
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Chart Options -->
+            <div class="trend-toolbar">
+
+              <label class="trend-check" for="show-context">
+                <input type="checkbox" id="show-context" checked>
+                Show all metro trends
+              </label>
+
+              <label class="trend-check" for="auto-scale-y">
+                <input type="checkbox" id="auto-scale-y" checked>
+                Auto-scale Y-axis
+              </label>
+
+              <label class="trend-check" for="line-median-summary">
+                <input type="checkbox" id="line-median-summary">
+                Median summary
+              </label>
+
+              <span id="line-count" class="trend-count"></span>
+
+            </div>
+
+
+
+            <div class="trend-key">
+              <span><i class="key-line key-selected"></i> Selected Metro</span>
+              <span><i class="key-line key-compare"></i> Comparison Metro</span>
+              <span><i class="key-line key-context"></i> Other Metros</span>
+            </div>
+
+            <div class="line-chart-holder">
+              <svg id="line-chart" viewBox="0 0 800 360"
+                   role="img" aria-label="Metro housing trends from 2021 to 2024"></svg>
+              <div id="line-tooltip" class="line-tooltip"></div>
+            </div>
+            <p id="line-message" class="line-note"></p>
+          </section>
+
+          <!-- Scatterplot -->
+          <section class="chart-card scatter-card" aria-labelledby="scatter-title">
+            <div class="chart-header">
+              <h2 class="chart-title" id="scatter-title">Metro Comparison</h2>
+              <p class="chart-description">Compare burden rates, income, and home values</p>
+            </div>
+
+            <div class="scatter-controls">
+              <label for="scatter-mode">COMPARE INDICATORS</label>
+              <select id="scatter-mode">
+                <option value="burden">Renter vs. Mortgage-Owner Burden</option>
+                <option value="market">Median Income vs. Median Home Value</option>
+              </select>
+            </div>
+
+            <div class="chart-canvas">
+              <svg id="scatterplot" class="chart-svg" viewBox="0 0 760 520"
+                   role="img" aria-label="Comparison of U.S. metro areas"></svg>
+            </div>
+            <p id="scatter-count" class="chart-description"></p>
+          </section>
+
+        </div>
+        <!-- End left column -->
+
+        <!-- Right column: Bar Chart -->
+        <section class="chart-card bar-card" aria-labelledby="bar-title">
+          <div class="chart-header">
+            <h2 class="chart-title" id="bar-title">Rankings</h2>
+            <p class="chart-description">Rank metropolitan areas by housing indicators</p>
+          </div>
+
+          
+          <div class="bar-controls">
+
+            <label for="chartyear">
+              YEAR
+              <select id="chartyear">
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024" selected>2024</option>
+              </select>
+            </label>
+
+            <label for="bar-metric">
+              HOUSING INDICATOR
+              <select id="bar-metric">
+                <option value="renter_burden_pct">
+                  Renter Burden
+                </option>
+                <option value="mortgage_owner_burden_pct">
+                  Mortgage-Owner Burden
+                </option>
+
+                <option value="burden_gap_renter_minus_mortgage_pp">
+                  Renter − Owner Burden Gap (pp)
+                </option>
+
+                <option value="median_household_income">
+                  Median Household Income
+                </option>
+                <option value="median_owner_home_value">
+                  Median Home Value
+                </option>
+              </select>
+            </label>
+
+            <label for="chartmode">
+              RANKING
+              <select id="chartmode">
+                <option value="both" selected>Top N / Bottom N</option>
+                <option value="top">Top N</option>
+                <option value="bottom">Bottom N</option>
+                <option value="all">All Metros</option>
+              </select>
+            </label>
+
+            <label for="chartcount" id="bar-count-field">
+              NUMBER OF METROS
+              <input
+                id="chartcount"
+                type="number"
+                min="1"
+                step="1"
+                value="10"
+              >
+            </label>
+
+            <!-- <div class="bar-actions">
+              <button type="button" id="bar-clear-all">
+                Clear All
+              </button>
+            </div> -->
+
+
+          </div>
+
+
+          <!-- <div
+            id="bar-compare-panel"
+            class="bar-compare-panel"
+          ></div> -->
+
+          <div class="bar-scroll">
+            <svg id="barchart" class="chart-svg" viewBox="0 0 800 600"
+                 role="img" aria-label="Ranking of metropolitan areas"></svg>
+          </div>
+          <p id="bar-description" class="chart-description"></p>
+        </section>
+      </div>
+      <!-- End other-charts -->
+
+      <!-- Tooltips shared with each chart's JS -->
+      <div id="scatter-tooltip" class="scatter-tooltip"></div>
+      <div id="bar-tooltip" class="bar-tooltip"></div>
+      <p id="dashboard-error" role="status"></p>
+    </div>
+    
   </div>
-
-  <!-- Scatterplot - Wenqi -->
-  <section class="chart-section">
-    <div id="scatterplot"></div>
-  </section>
-
-  <!-- ========================================== -->
-  <!-- Interactive Line Chart - Zoe Zhao          -->
-  <!-- ========================================== -->
-
-  <section class="trend-card" aria-labelledby="line-chart-heading">
-
-    <div class="trend-header">
-
-      <div>
-        <p class="trend-eyebrow">
-          HOUSING AFFORDABILITY · 2021–2024
-        </p>
-
-        <h2 id="line-chart-heading">
-          Housing affordability across metros
-        </h2>
-
-        <p class="trend-subtitle">
-          Explore every metro in context;
-          highlight one to inspect its trend
-        </p>
-      </div>
-
-      <span class="trend-chip">
-        ACS · 2021–2024
-      </span>
-
-    </div>
-
-
-    <!-- Line Chart Controls -->
-    <div class="trend-controls">
-
-      <!-- Metric selector -->
-      <label for="metric-select">
-        Measure
-
-        <select id="metric-select">
-
-          <option value="renter_burden_pct">
-            Renter burden (%)
-          </option>
-
-          <option value="mortgage_owner_burden_pct">
-            Mortgage-owner burden (%)
-          </option>
-
-          <option value="burden_gap_renter_minus_mortgage_pp">
-            Renter − owner burden gap (pp)
-          </option>
-
-          <option value="median_household_income">
-            Median household income (USD)
-          </option>
-
-          <option value="median_owner_home_value">
-            Median home value (USD)
-          </option>
-
-        </select>
-      </label>
-
-
-      <!-- Selected metro -->
-      <label for="metro-select">
-        Highlighted metro
-
-        <select
-          id="metro-select"
-          aria-label="Choose a highlighted metropolitan area">
-        </select>
-
-      </label>
-
-
-      <!-- Comparison metro -->
-      <label for="compare-select">
-        Compare another metro
-        <span class="optional">(optional)</span>
-
-        <select id="compare-select">
-          <option value="">None</option>
-        </select>
-
-      </label>
-
-    </div>
-
-
-    <!-- Show all metros toggle -->
-    <div class="trend-toolbar">
-
-      <label class="trend-check">
-        <input
-          id="show-context"
-          type="checkbox"
-          checked>
-
-        Show all metros as context
-      </label>
-
-      <span id="line-count" class="trend-count"></span>
-
-    </div>
-
-
-    <!-- Legend -->
-    <div class="trend-key" aria-label="Line chart color key">
-
-      <span>
-        <i class="key-line key-context"></i>
-        Other metros
-      </span>
-
-      <span>
-        <i class="key-line key-selected"></i>
-        Selected metro
-      </span>
-
-      <span>
-        <i class="key-line key-compare"></i>
-        Comparison
-      </span>
-
-      <span>
-        <i class="key-line key-hover"></i>
-        Hover preview
-      </span>
-
-    </div>
-
-
-    <!-- D3 Line Chart -->
-    <div class="line-chart-holder">
-
-      <svg
-        id="line-chart"
-        role="img"
-        aria-label="Metropolitan area housing affordability trends from 2021 through 2024">
-      </svg>
-
-      <!-- Tooltip -->
-      <div
-        id="line-tooltip"
-        class="line-tooltip"
-        role="status">
-      </div>
-
-    </div>
-
-
-    <!-- Status message -->
-    <p id="line-message" class="line-note"></p>
-
-  </section>
-
-
-  <!-- ========================================== -->
-  <!-- Original Team Documentation                -->
-  <!-- ========================================== -->
-
-  <div class="content-column">
+  
+  <!-- Your writeup goes here -->
+  <div class = "content-column">
 
     <h1>Demo Video</h1>
     
@@ -312,14 +450,16 @@
   
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src="lib/d3.v7/d3.v7.min.js"></script>
-
-  <!-- Individual Charts -->
-  <script src="js/barchart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  
+  <script src="js/map.js"></script>
   <script src="js/linechart.js"></script>
   <script src="js/scatterplot.js"></script>
+  <script src="js/barchart.js"></script>
 
-  <!-- Shared Visualization -->
   <script src="js/visualization.js"></script>
 
+  
 </body>
 </html>
+
