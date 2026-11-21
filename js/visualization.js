@@ -88,6 +88,7 @@
   //     .attr("id", "multi-selection-panel");
   // }
 
+
   const mapCard = d3.select(".map-card");
   const toolbar = mapCard.select(".toolbar");
 
@@ -99,19 +100,24 @@
   }
 
 
+
   // panel
   //   .style("padding", "10px 16px")
   //   .style("border-top", "1px solid #e6edf4")
   //   .style("font", "12px Arial, sans-serif")
   //   .style("color", "#52677d");
 
+
   panel
-    .style("padding", "0")
-    .style("border-top", "none")
+    .style("position", "relative")
     .style("margin-left", "auto")
     .style("align-self", "flex-end")
+    .style("padding", "0")
+    .style("border-top", "none")
     .style("font", "12px Arial, sans-serif")
-    .style("color", "#52677d");
+    .style("color", "#52677d")
+    .style("z-index", "20");
+
 
   let expanded = false;
 
@@ -199,14 +205,28 @@
 
     if (!expanded || !count) return;
 
-    panel.append("div")
+    const dropdown = panel.append("div")
+      .style("position", "absolute")
+      .style("top", "calc(100% + 8px)")
+      .style("right", "0")
+      .style("width", "min(380px, 90vw)")
+      .style("box-sizing", "border-box")
+      .style("padding", "10px 12px")
+      .style("background", "#fff")
+      .style("border", "1px solid #cbd9e7")
+      .style("border-radius", "8px")
+      .style("box-shadow", "0 5px 18px rgba(30,55,80,0.14)")
+      .style("z-index", "100");
+
+
+    dropdown.append("div")
       .style("margin", "9px 0 6px")
       .style("font-size", "11px")
       .text(
         "Click a metro below to remove it from the selection."
       );
 
-    const list = panel.append("div")
+    const list = dropdown.append("div")
       .attr("id", "selected-metro-list")
       .style("display", "flex")
       .style("flex-wrap", "wrap")
