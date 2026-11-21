@@ -1,6 +1,5 @@
 
 /*
- * COSI 116A — Housing Affordability Line Chart
  *
  * Controls are defined in index.html.
  * Visual styling is defined in css/linechart.css.

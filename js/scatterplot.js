@@ -1,6 +1,5 @@
 
 /*
- * COSI 116A — Housing Scatterplot
  *
  * Click: replace selection
  * Modifier + click: add/remove one

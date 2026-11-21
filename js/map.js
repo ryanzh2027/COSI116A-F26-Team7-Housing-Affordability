@@ -1,6 +1,5 @@
 
 /*
- *
  * Brush enabled by default.
  * Click and brush work together.
  *
