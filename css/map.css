@@ -278,3 +278,8 @@
   color: #929aa5;
   border-color: #929aa5;
 }
+
+/* Hide the old map selection display */
+.vis-holder #selection {
+  display: none !important;
+}

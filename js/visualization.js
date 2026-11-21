@@ -79,18 +79,37 @@
   // Selection panel
  
 
+  // const mapCard = d3.select(".map-card");
+
+  // let panel = mapCard.select("#multi-selection-panel");
+
+  // if (panel.empty() && !mapCard.empty()) {
+  //   panel = mapCard.insert("div", "#map-heading")
+  //     .attr("id", "multi-selection-panel");
+  // }
+
   const mapCard = d3.select(".map-card");
+  const toolbar = mapCard.select(".toolbar");
 
-  let panel = mapCard.select("#multi-selection-panel");
+  let panel = toolbar.select("#multi-selection-panel");
 
-  if (panel.empty() && !mapCard.empty()) {
-    panel = mapCard.insert("div", "#map-heading")
+  if (panel.empty() && !toolbar.empty()) {
+    panel = toolbar.append("div")
       .attr("id", "multi-selection-panel");
   }
 
+
+  // panel
+  //   .style("padding", "10px 16px")
+  //   .style("border-top", "1px solid #e6edf4")
+  //   .style("font", "12px Arial, sans-serif")
+  //   .style("color", "#52677d");
+
   panel
-    .style("padding", "10px 16px")
-    .style("border-top", "1px solid #e6edf4")
+    .style("padding", "0")
+    .style("border-top", "none")
+    .style("margin-left", "auto")
+    .style("align-self", "flex-end")
     .style("font", "12px Arial, sans-serif")
     .style("color", "#52677d");
 
@@ -111,9 +130,18 @@
 
     panel.selectAll("*").remove();
 
+    // const count = shared.selectedMetros.length;
+
+    // if (!count) expanded = false;
     const count = shared.selectedMetros.length;
 
-    if (!count) expanded = false;
+    if (!count) {
+      expanded = false;
+      panel.style("display", "none");
+      return;
+    }
+
+    panel.style("display", "block");
 
     const header = panel.append("div")
       .style("display", "flex")
