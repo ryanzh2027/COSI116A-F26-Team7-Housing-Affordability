@@ -412,9 +412,124 @@
     <p><em>Final visualization screenshots (PNG images), design justifications, UI walk-through, and linked presentation slides.</em></p>
 
     <h1>Data Analysis</h1>
-    <p><em>Summary of data, data types, and data preprocessing.</em></p>
 
-    <p><em>Expectation: Data sources match the problem statement and are appropriate. These descriptions should be very explicit so someone could read your page and properly reproduce your results.</em></p>
+    <h2>Data Sources</h2>
+
+    <p>
+      We used the U.S. Census Bureau's ACS 1-Year data
+      from 2021 to 2024. We downloaded four tables
+      for each year:
+    </p>
+
+    <ul>
+      <li>
+        B25070: Gross Rent as a Percentage of
+        Household Income
+      </li>
+      <li>
+        B25091: Mortgage Status by Selected Monthly
+        Owner Costs as a Percentage of Household Income
+      </li>
+      <li>
+        B19013: Median Household Income
+      </li>
+      <li>
+        B25077: Median Value of Owner-Occupied
+        Housing Units
+      </li>
+    </ul>
+
+    <p>
+      We also used Census geography files and CBSA
+      boundary data for the map.
+    </p>
+
+    <h2>Data Types</h2>
+
+    <p>
+      Our data include categorical variables such as
+      metro names, GEO_ID, and CBSA codes.
+      Numerical variables include housing-unit counts,
+      burden rates, median household income, and
+      median home value. We also use year to compare
+      data from 2021 to 2024.
+    </p>
+
+    <h2>Data Preprocessing</h2>
+
+    <p>
+      We used Python and pandas to process the
+      original ACS files.
+    </p>
+
+    <p>
+      First, we read the ACS data and geography files
+      for each year. We selected metropolitan areas
+      and matched the tables using GEO_ID.
+    </p>
+
+    <p>
+      The original B25070 and B25091 tables contain
+      housing-unit counts, so we calculated the burden
+      rates ourselves. We used 30% of household income
+      as the threshold.
+    </p>
+
+    <p><strong>Renter burden (%)</strong></p>
+
+    <p>
+      100 × (B25070_E007 + B25070_E008 +
+      B25070_E009 + B25070_E010)
+      / (B25070_E001 − B25070_E011)
+    </p>
+
+    <p><strong>Mortgage-owner burden (%)</strong></p>
+
+    <p>
+      100 × (B25091_E008 + B25091_E009 +
+      B25091_E010 + B25091_E011)
+      / (B25091_E002 − B25091_E012)
+    </p>
+
+    <p>
+      We excluded units where the cost-to-income
+      ratio was not computed. For homeowners,
+      we only included those with a mortgage.
+    </p>
+
+    <p>We also calculated:</p>
+
+    <p>
+      <strong>Burden gap (pp)</strong> =
+      Renter burden − Mortgage-owner burden
+    </p>
+
+    <p>
+      For income and home value, we used
+      B19013_E001 and B25077_E001.
+    </p>
+
+    <p>
+      We checked missing values, invalid numbers,
+      and duplicate metro-year records.
+      We did not replace missing values with zero.
+    </p>
+
+    <p>
+      Then we combined the four years into one
+      dataset using CBSA codes and years.
+      We exported the processed data to CSV files
+      and used CBSA codes to match the data
+      with the map boundaries.
+    </p>
+
+    <h2>Data Files</h2>
+
+    <p>
+      The processed CSV data and geographic boundary
+      files are stored in the project's data folder.
+      The dashboard loads these files using D3.
+    </p>
 
     <h1>Task Analysis</h1>
 
