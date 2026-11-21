@@ -304,3 +304,18 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+
+
+/* Unified light tooltips for Trends, Scatterplot and Rankings */
+
+.vis-holder #line-tooltip,
+.vis-holder #scatter-tooltip,
+.vis-holder #bar-tooltip {
+  background: #ffffff;
+  color: #24354e;
+  border: 1px solid #e1e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
+}
+

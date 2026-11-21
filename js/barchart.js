@@ -38,7 +38,8 @@ function drawBarChart(data, cbsa, year) {
     normal: "#477fb2",
     selected: "#e68132",
     hover: "#e68132",
-    median: "#8496a8"
+    // median: "#8496a8"
+    median: "#64748b"
   };
 
   function normalize(value) {
@@ -541,6 +542,22 @@ function drawBarChart(data, cbsa, year) {
       .attr("stroke-width", 1.2)
       .attr("stroke-dasharray", "4,4")
       .attr("pointer-events", "none");
+
+    // Label for the all-metro median reference line
+    const labelX = Math.max(
+      105,
+      Math.min(plotWidth - 105, x(nationalMedian))
+    );
+
+    chart.append("text")
+      .attr("x", labelX)
+      .attr("y", -15)
+      .attr("text-anchor", "middle")
+      .attr("font-size", 11)
+      .attr("font-weight", 600)
+      .attr("fill", COLORS.median)
+      .attr("pointer-events", "none")
+      .text(`Median: ${format(nationalMedian)}`);
   }
 
    

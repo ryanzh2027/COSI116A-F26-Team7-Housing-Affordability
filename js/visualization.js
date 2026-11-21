@@ -485,8 +485,29 @@
     updateCharts();
   });
 
+  // dispatch.on("metricchange.coordinator", detail => {
+  //   const mapping = {
+  //     renter: "burden_compare",
+  //     owner: "burden_compare",
+  //     gap: "burden_gap_renter_minus_mortgage_pp",
+  //     income: "market_compare",
+  //     value: "market_compare"
+  //   };
+
+  //   const next = mapping[detail?.metric];
+
+  //   if (next) {
+  //     window.housingLineChart?.setMetric?.(next);
+  //   }
+  // });
+
+
   dispatch.on("metricchange.coordinator", detail => {
-    const mapping = {
+    if (detail?.source !== "map") return;
+
+    const metric = detail.metric;
+
+    const trendMapping = {
       renter: "burden_compare",
       owner: "burden_compare",
       gap: "burden_gap_renter_minus_mortgage_pp",
@@ -494,10 +515,41 @@
       value: "market_compare"
     };
 
-    const next = mapping[detail?.metric];
+    const barMapping = {
+      renter: "renter_burden_pct",
+      owner: "mortgage_owner_burden_pct",
+      gap: "burden_gap_renter_minus_mortgage_pp",
+      income: "median_household_income",
+      value: "median_owner_home_value"
+    };
 
-    if (next) {
-      window.housingLineChart?.setMetric?.(next);
+    if (!trendMapping[metric]) return;
+
+    // Update Trends
+    window.housingLineChart?.setMetric?.(
+      trendMapping[metric]
+    );
+
+    // Update Scatterplot
+    const scatterMode =
+      metric === "income" || metric === "value"
+        ? "market"
+        : "burden";
+
+    const scatter = d3.select("#scatter-mode");
+
+    if (scatter.property("value") !== scatterMode) {
+      scatter.property("value", scatterMode);
+      window.redrawScatterplot?.();
+    }
+
+    // Update Rankings
+    const bar = d3.select("#bar-metric");
+    const barMetric = barMapping[metric];
+
+    if (bar.property("value") !== barMetric) {
+      bar.property("value", barMetric);
+      window.redrawBarChart?.();
     }
   });
 

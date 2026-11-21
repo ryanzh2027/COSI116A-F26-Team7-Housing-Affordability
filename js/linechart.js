@@ -1723,8 +1723,8 @@ const clipPadding = 10;
             "r",
             p =>
               p.year === activeYear
-                ? 6.3
-                : 3.6
+                ? 7.5
+                : 5.5
           )
           .attr(
             "fill",
@@ -1856,6 +1856,37 @@ const clipPadding = 10;
       return null;
     }
 
+    function nearestPointSeries(event) {
+      const [px, py] = d3.pointer(
+        event,
+        svg.node()
+      );
+
+      let nearest = null;
+      let minDistance = 16 * 16;
+
+      for (const entry of info.main) {
+        if (!entry.aggregate && info.chosen.length > 12) {
+          continue;
+        }
+
+        for (const p of entry.points) {
+          if (!valid(p.value)) continue;
+
+          const distance =
+            (px - x(p.year)) ** 2 +
+            (py - y(p.value)) ** 2;
+
+          if (distance < minDistance) {
+            minDistance = distance;
+            nearest = entry;
+          }
+        }
+      }
+
+      return nearest;
+    }
+
 
     function clearLocalHover() {
       hideTooltip();
@@ -1873,24 +1904,29 @@ const clipPadding = 10;
       }
     }
 
+    
+
     overlay.on(
       "mousemove.trend",
       event => {
-        const entry =
-          nearestSeries(event);
+        // Tooltip: only near visible data points
+        const pointEntry = nearestPointSeries(event);
+
+        // Hover: all lines, including gray background trends
+        const entry = pointEntry || nearestSeries(event);
+
+        if (pointEntry) {
+          showTooltip(event, pointEntry);
+        } else {
+          hideTooltip();
+        }
 
         if (!entry) {
           clearLocalHover();
           return;
         }
 
-        showTooltip(
-          event,
-          entry
-        );
-
-        const next =
-          entry.code || null;
+        const next = entry.code || null;
 
         if (next !== localHover) {
           localHover = next;
@@ -1905,6 +1941,8 @@ const clipPadding = 10;
         }
       }
     );
+
+
 
     overlay.on(
       "mouseleave.trend",
