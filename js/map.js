@@ -266,9 +266,9 @@ function fixWinding(feature) {
   }
 }
 
-// =========================================
+
 // Map initialization
-// =========================================
+
 
 async function start() {
   const [csv, raw2020, raw2024, usa] =
@@ -802,9 +802,9 @@ async function start() {
       );
   }
 
-  // =========================================
+  
   // Brush + Click + Hover
-  // =========================================
+  
 
   let brushLabel = d3.select("#map-brush-label");
 
@@ -816,7 +816,8 @@ async function start() {
 
     brushLabel = container.append("label")
       .attr("id", "map-brush-label")
-      .style("display", "inline-flex")
+      // .style("display", "inline-flex")
+      .style("display", "none")
       .style("align-items", "center")
       .style("gap", "7px")
       .style("margin-left", "14px")
