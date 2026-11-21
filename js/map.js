@@ -360,14 +360,25 @@ async function start() {
       min = -bound;
       max = bound;
 
+      scale = d3.scaleDiverging(
+        t => d3.interpolateRdBu(1 - t)
+      )
+        .domain([min, 0, max])
+        .clamp(true);
+
+      // scale = d3.scaleSequential(d3.interpolateBlues)
+      //   .domain([min, max])
+      //   .clamp(true);
+
       // scale = d3.scaleDiverging(
-      //   t => d3.interpolateRdBu(1 - t)
+      //   d3.piecewise(d3.interpolateRgb, [
+      //     "#6b57a8",
+      //     "#f0f2f5",
+      //     "#087f8c"
+      //   ])
       // )
       //   .domain([min, 0, max])
       //   .clamp(true);
-      scale = d3.scaleSequential(d3.interpolateBlues)
-        .domain([min, max])
-        .clamp(true);
 
     } else {
       if (max <= min) max = min + 1;
@@ -707,12 +718,29 @@ async function start() {
     d3.select("#legend-max")
       .text(shortMetric(max, info.type));
 
-    d3.select("#legend-note")
-      .text(
-        state.metric === "gap"
-          ? "Light blue: owner burden higher (−) · Dark blue: renter burden higher (+)"
-          : "Same color scale across all four years."
-      );
+    // d3.select("#legend-note")
+    //   .text(
+    //     state.metric === "gap"
+    //       ? "Owner burden higher | 0 pp | Renter burden higher"
+    //       : "Same color scale across all four years."
+    //   );
+
+    const legendNote = d3.select("#legend-note");
+
+    if (state.metric === "gap") {
+      legendNote
+        .classed("gap-legend-note", true)
+        .html(`
+          <span>Owner burden higher</span>
+          <span>Equal burden</span>
+          <span>Renter burden higher</span>
+        `);
+    } else {
+      legendNote
+        .classed("gap-legend-note", false)
+        .text("Same color scale across all four years.");
+    }
+
   }
 
  

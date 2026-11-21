@@ -1724,7 +1724,7 @@ const clipPadding = 10;
             p =>
               p.year === activeYear
                 ? 7.5
-                : 5.5
+                : 5.8
           )
           .attr(
             "fill",

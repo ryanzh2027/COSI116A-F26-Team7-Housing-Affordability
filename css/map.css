@@ -290,3 +290,27 @@
 .vis-holder #selection {
   display: none !important;
 }
+
+
+/* Gap legend labels */
+
+.vis-holder #legend-note.gap-legend-note {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 380px;
+  max-width: 100%;
+  gap: 0;
+}
+
+.gap-legend-note span:first-child {
+  text-align: left;
+}
+
+.gap-legend-note span:nth-child(2) {
+  text-align: center;
+}
+
+.gap-legend-note span:last-child {
+  text-align: right;
+}
+

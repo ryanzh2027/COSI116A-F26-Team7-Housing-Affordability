@@ -309,7 +309,7 @@
 
 /* Unified light tooltips for Trends, Scatterplot and Rankings */
 
-.vis-holder #line-tooltip,
+/* .vis-holder #line-tooltip,
 .vis-holder #scatter-tooltip,
 .vis-holder #bar-tooltip {
   background: #ffffff;
@@ -317,5 +317,33 @@
   border: 1px solid #e1e8f0;
   border-radius: 10px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
+} */
+
+
+/* Shared tooltip appearance */
+
+#tooltip,
+.vis-holder #tooltip,
+.vis-holder #line-tooltip,
+.vis-holder #scatter-tooltip,
+.vis-holder #bar-tooltip {
+  display: none;
+  position: fixed;
+  z-index: 101;
+  pointer-events: none;
+  box-sizing: border-box;
+
+  max-width: min(340px, calc(100vw - 20px));
+  padding: 15px;
+
+  background: #ffffff;
+  color: #24354e;
+  border: 1px solid #e1e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
+
+  font: 12px/1.6 Arial, sans-serif;
+  white-space: normal;
 }
+
 
