@@ -108,9 +108,16 @@
 
 /* Primary metro: orange */
 
-.vis-holder .metro.selected {
+/* .vis-holder .metro.selected {
   stroke: #ed8735;
   stroke-width: 2.6;
+} */
+.vis-holder .metro.selected {
+  stroke: #ed8735;
+  stroke-width: 3;
+  filter:
+    drop-shadow(0 0 2px #24354e)
+    drop-shadow(0 0 1px #253a55);
 }
 
 /* Comparison metro: blue */

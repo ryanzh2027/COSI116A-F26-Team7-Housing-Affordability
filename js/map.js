@@ -360,10 +360,13 @@ async function start() {
       min = -bound;
       max = bound;
 
-      scale = d3.scaleDiverging(
-        t => d3.interpolateRdBu(1 - t)
-      )
-        .domain([min, 0, max])
+      // scale = d3.scaleDiverging(
+      //   t => d3.interpolateRdBu(1 - t)
+      // )
+      //   .domain([min, 0, max])
+      //   .clamp(true);
+      scale = d3.scaleSequential(d3.interpolateBlues)
+        .domain([min, max])
         .clamp(true);
 
     } else {
@@ -707,7 +710,7 @@ async function start() {
     d3.select("#legend-note")
       .text(
         state.metric === "gap"
-          ? "Blue: owner burden higher · Red: renter burden higher"
+          ? "Light blue: owner burden higher (−) · Dark blue: renter burden higher (+)"
           : "Same color scale across all four years."
       );
   }
