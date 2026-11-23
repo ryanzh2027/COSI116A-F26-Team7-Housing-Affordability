@@ -24,12 +24,20 @@
 
 /* Bar Chart controls */
 
+
 .vis-holder .bar-controls {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 0.7fr 1.5fr 1.1fr 0.8fr;
   gap: 10px;
   margin: 12px 0 15px;
 }
+
+@media (max-width: 850px) {
+  .vis-holder .bar-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 
 .vis-holder .bar-controls label {
   display: flex;

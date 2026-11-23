@@ -78,7 +78,7 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  height: 38px;
+  height: 32px;
   padding: 0 10px;
 
   border: 1px solid #dce5ee;
@@ -324,7 +324,7 @@
 .trend-card #line-metro-picker-button {
   width: 100%;
   min-width: 0;
-  height: 44px;
+  height: 34px;
   padding: 0 12px;
   border: 1px solid #dce5ee;
   border-radius: 7px;
